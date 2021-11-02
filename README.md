@@ -1,1 +1,1 @@
-# SQL_COVID19_EDA
+# COVID19_EDA_and_Visualizations
