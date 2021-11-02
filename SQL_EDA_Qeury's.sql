@@ -88,7 +88,7 @@ GROUP BY date
 ORDER BY 1, 2;
 
 
--- Global Population VS Vaccination by Day with Rolling Count
+-- Global Population VS Vaccination (at least one) by Day with Rolling Count
 
 SELECT dea.continent, 
 		dea.location, 
@@ -102,12 +102,43 @@ JOIN SQL_COVID19_EDA..Covid_Vaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
-ORDER BY 2,3;
-
-
--- USE CTE
+order by 2,3;
 
 
 
+-- Using CTE to perform Calculation on Partition By in previous query
 
+WITH PopvsVac (Continent, Location, Date, Population, new_vaccinations, Num_People_Vaccinated)
+AS
+(
+SELECT dea.continent, 
+		dea.location, 
+		dea.date, 
+		dea.population, 
+		vac.new_vaccinations,
+		SUM(CONVERT(int,vac.new_vaccinations)) 
+		OVER (partition by dea.location ORDER BY dea.location, dea.date) AS Num_People_Vaccinated
+FROM SQL_COVID19_EDA..Covid_Deaths AS dea
+JOIN SQL_COVID19_EDA..Covid_Vaccinations AS vac
+	ON dea.location = vac.location
+	AND dea.date = vac.date
+WHERE dea.continent is not null
+)
+SELECT *, (Num_People_Vaccinated/Population)*100 AS Percentage_Vaccinated
+FROM PopvsVac;
 
+-- View fot data visualizations
+
+CREATE VIEW Percent_Population_Vaccinated AS
+SELECT dea.continent, 
+		dea.location, 
+		dea.date, 
+		dea.population, 
+		vac.new_vaccinations,
+		SUM(CONVERT(int,vac.new_vaccinations)) 
+		OVER (partition by dea.location ORDER BY dea.location, dea.date) AS Num_People_Vaccinated
+FROM SQL_COVID19_EDA..Covid_Deaths AS dea
+JOIN SQL_COVID19_EDA..Covid_Vaccinations AS vac
+	ON dea.location = vac.location
+	AND dea.date = vac.date
+WHERE dea.continent is not null
