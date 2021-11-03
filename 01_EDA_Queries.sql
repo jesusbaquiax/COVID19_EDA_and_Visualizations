@@ -1,16 +1,49 @@
-SELECT *
-FROM SQL_COVID19_EDA..Covid_Deaths;
+/* COVID 19 Explorative Data Analysis as of 10/31/2021 */
+
+-- Inspect excel files that will be used
+
+-- Covid_Deaths Table
 
 SELECT *
-FROM SQL_COVID19_EDA..Covid_Vaccinations;
+FROM SQL_COVID19_EDA..Covid_Deaths
+WHERE continent is not null
+ORDER BY 3,4;
 
 
--- Select Data to analysis
+-- Covid_Vaccinations Table
+
+SELECT *
+FROM SQL_COVID19_EDA..Covid_Vaccinations
+WHERE continent is not null
+ORDER BY 3,4;
+
+
+-- Selecting Data for Analysis
+
 SELECT location, date, total_cases, new_cases, total_deaths, population
 FROM SQL_COVID19_EDA..Covid_Deaths
+WHERE continent is not null
 ORDER BY 1, 2;
 
--- Total Cases VS Total Deaths Percentage by Date filtered by Country
+
+/* Total Cases VS Population Percentage by Date Filtered by Country:
+13.81% of the U.S. population has been diagnosed with Covid. */
+
+SELECT location, 
+		date, 
+		total_cases, 
+		population, 
+		ROUND(((total_cases/population) * 100),2) AS Covid_Pop_Percentage
+FROM SQL_COVID19_EDA..Covid_Deaths
+WHERE continent is not null
+AND LOCATION = 'United States'
+ORDER BY 1, 2;
+
+
+/* Total Cases VS Total Deaths Percentage by Date filtered by Country:
+1.62% of all Covid cases resulted in a death in the United States. 
+While Covid has had a grave cost of life, the percent of cases and deaths are still small.
+*/
 
 SELECT location, 
 		date, 
@@ -22,20 +55,10 @@ WHERE continent is not null
 AND LOCATION = 'United States'
 ORDER BY 1, 2;
 
--- Total Cases VS Population Percentage by Date Filtered by Country
 
-SELECT location, 
-		date, 
-		total_cases, 
-		population, 
-		ROUND(((total_cases/population) * 100),2) AS Covid_Pop_Percentage
-FROM SQL_COVID19_EDA..Covid_Deaths
-WHERE continent is not null
-WHERE LOCATION = 'United States'
-ORDER BY 1, 2;
-
-
--- Highest Infection VS Population Rates by Country
+/* Highest Infection VS Population Rates by Country:
+The United States ranks 15th for infection percentages compared to other countries.
+The combined populations of the countries ranked 1st thru 14th is smaller than the United States. */
 
 SELECT location, 
 		population,
@@ -47,7 +70,9 @@ GROUP BY location, population
 ORDER BY Infection_Percentage DESC;
 
 
--- Highest Death Rates by Country
+/* Highest Death Rates by Country:
+The United States has the highest count of Covid deaths followed by Brazil, India, Mexico, and Russia.
+The percent of deaths is still relatively small compared to each country's population. */
 
 SELECT location, 
 		MAX(cast(total_deaths as int)) AS Total_Deaths
@@ -57,7 +82,8 @@ GROUP BY location
 ORDER BY Total_Deaths DESC;
 
 
--- Highest Death Rates by Continent
+/* Highest Death Rates by Continent:
+North America, South America, Asia, Europe, Africa, Oceania */
 
 SELECT continent, 
 		MAX(cast(total_deaths as int)) AS Total_Deaths
@@ -66,17 +92,9 @@ WHERE continent is not null
 GROUP BY continent
 ORDER BY Total_Deaths DESC;
 
--- Another table for Highest Death Rates by Continent
--- shows discrepancy
-SELECT location, 
-		MAX(cast(total_deaths as int)) AS Total_Deaths
-FROM SQL_COVID19_EDA..Covid_Deaths
-WHERE continent is null
-GROUP BY location
-ORDER BY Total_Deaths DESC;
 
-
--- Global Cases VS Deaths Percentage by Day
+/* Global Cases VS Deaths Percentage by Day:
+1.44% of all the Global Covid cases resulted in death.*/
 
 SELECT  date, 
 		SUM(new_cases) AS Total_Cases, 
@@ -88,7 +106,7 @@ GROUP BY date
 ORDER BY 1, 2;
 
 
--- Global Population VS Vaccination (at least one) by Day with Rolling Count
+/* Global Population VS Vaccination (at least one shot) by Day with Rolling Count */
 
 SELECT dea.continent, 
 		dea.location, 
@@ -102,6 +120,7 @@ JOIN SQL_COVID19_EDA..Covid_Vaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+AND vac.new_vaccinations is not null
 order by 2,3;
 
 
@@ -123,11 +142,12 @@ JOIN SQL_COVID19_EDA..Covid_Vaccinations AS vac
 	ON dea.location = vac.location
 	AND dea.date = vac.date
 WHERE dea.continent is not null
+AND vac.new_vaccinations is not null
 )
 SELECT *, (Num_People_Vaccinated/Population)*100 AS Percentage_Vaccinated
 FROM PopvsVac;
 
--- View fot data visualizations
+-- Creating View fot data visualizations
 
 CREATE VIEW Percent_Population_Vaccinated AS
 SELECT dea.continent, 
