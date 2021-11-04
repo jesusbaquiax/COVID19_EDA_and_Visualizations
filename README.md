@@ -35,7 +35,7 @@ The dataset comes from [Our World in Data](https://ourworldindata.org/covid-deat
 
 ![viz_03](./Images/viz_03.PNG)
 
-![viz_04](./Images/viz_04.PNG)
+![viz_04](./Images/viz_04_01.PNG)
 
 
 
