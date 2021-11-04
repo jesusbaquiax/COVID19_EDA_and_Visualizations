@@ -29,13 +29,13 @@ The dataset comes from [Our World in Data](https://ourworldindata.org/covid-deat
 
 ![visualization dashboard](./Images/covid_dashboard_visualizations.png)
 
-![viz_01](./Images/viz_01.png)
+![viz_01](./Images/viz_01.PNG)
 
-![viz_02](./Images/viz_02.png)
+![viz_02](./Images/viz_02.PNG)
 
-![viz_03](./Images/viz_03.png)
+![viz_03](./Images/viz_03.PNG)
 
-![viz_04](./Images/viz_04.png)
+![viz_04](./Images/viz_04.PNG)
 
 
 
