@@ -31,13 +31,24 @@ The dataset comes from [Our World in Data](https://ourworldindata.org/covid-deat
 
 ![visualization dashboard](./Images/covid_dashboard_visualizations.png)
 
+This is a [Tableau Visualizationns Dashboard](https://public.tableau.com/app/profile/jesus.baquiax8034/viz/CovidDashboardVisualizations/Sheet4) that contains a high level overview of the information.
+
+
 ![viz_01](./Images/viz_01.PNG)
+
+This table highlights the global number of Covid cases and deaths. 2.02% of all Covid cases has resulted in death.
 
 ![viz_02](./Images/viz_02.PNG)
 
+This bar chart highlights the total number of Covid death's by continent.
+
 ![viz_03](./Images/viz_03.PNG)
 
+This map highlights the count of Covid Cases by country using color intensity. The stronger the orange intensity the more Covid cases in that country.
+
 ![viz_04](./Images/viz_04_01.PNG)
+
+This time series graph highlights the average percent of the population who were infected with Covid for six countries with a forecast prediction. 
 
 
 
