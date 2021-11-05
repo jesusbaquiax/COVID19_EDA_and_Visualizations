@@ -5,10 +5,9 @@
 
 ## Table of Cotents
 
-* [Overview](#overview)
-* [Data Understanding](#data-understanding)
-* [Exploratory Data Analysis](#data-preparation)
-* [Visualizations](#model-training-and-testing)
+* [Overview]
+* [Data Understanding]
+* [Exploratory Data Analysis & Visualizations]
 
 
 ## Overview
@@ -22,12 +21,7 @@ Covid 19 has had a devastating impact on the world. It has changed the way of li
 The dataset comes from [Our World in Data](https://ourworldindata.org/covid-deaths) which has been collecting and tracking Covid data since the first Covid cases began being report back in January 2020. The website  allows you to specify the time range for the data that you want. The specific data used contained information Covid cases, deaths, and vaccinations for each country and continent.
 
 
-## Exploratory Data Analysis
-
-
-
-
-## Visualizations
+## Exploratory Data Analysis & Visualizations
 
 ![visualization dashboard](./Images/covid_dashboard_visualizations.png)
 
