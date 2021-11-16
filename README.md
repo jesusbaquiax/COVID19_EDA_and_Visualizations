@@ -6,8 +6,8 @@
 ## Table of Cotents
 
 * [Overview](#Overview)
-* [Data Understanding](#Data Understanding)
-* [Exploratory Data Analysis & Visualizations](#Exploratory Data Analysis & Visualizations)
+* [Data Understanding](#Data-Understanding)
+* [Exploratory Data Analysis & Visualizations](#Exploratory-Data-Analysis-&-Visualizations)
 
 
 ## Overview
