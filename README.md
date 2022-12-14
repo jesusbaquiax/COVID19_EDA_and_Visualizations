@@ -3,7 +3,7 @@
 
 # Covid EDA & Visualizations
 
-## Table of Cotents
+## Table of Contents
 
 * [Overview](#Overview)
 * [Data Understanding](#Data-Understanding)
